@@ -1,0 +1,16 @@
+package com.bracode.confecon;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ConfeconApplicationTests {
+
+	@Test
+	public void contextLoads() {
+	}
+
+}
