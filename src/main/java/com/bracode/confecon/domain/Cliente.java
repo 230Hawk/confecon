@@ -31,18 +31,19 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private String nomeFantasia;
 	
 	@Column(unique=true)
 	private String email;
-	
 	private String cpfCnpj;
+	private String iEstadual;
 	private Integer tipo;
 	
 	@JsonIgnore
 	private String senha;
 	private Integer user;
+	private String contato;
 
-	
 	@OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
@@ -63,15 +64,20 @@ public class Cliente implements Serializable {
 		addPerfil(Perfil.FREE);
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpfCnpj, TipoCliente tipo, String senha, TipoUser user) {
+	public Cliente(Integer id, String nome, String nomeFantasia, String email,
+			String cpfCnpj, String iEstadual, TipoCliente tipo, String senha,
+			TipoUser user, String contato) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.nomeFantasia = nomeFantasia;
 		this.email = email;
 		this.cpfCnpj = cpfCnpj;
+		this.iEstadual = iEstadual;
 		this.tipo = (tipo==null) ? null : tipo.getCod();
 		this.senha = senha;
 		this.user = (tipo==null) ? null : user.getCod();
+		this.contato = contato;
 		addPerfil(Perfil.FREE);
 	}
 
@@ -90,6 +96,13 @@ public class Cliente implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
+	}
 
 	public String getEmail() {
 		return email;
@@ -105,6 +118,14 @@ public class Cliente implements Serializable {
 
 	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
+	}
+	
+	public String getiEstadual() {
+		return iEstadual;
+	}
+
+	public void setiEstadual(String iEstadual) {
+		this.iEstadual = iEstadual;
 	}
 
 	public TipoCliente getTipo() {
@@ -123,6 +144,15 @@ public class Cliente implements Serializable {
 		this.user = user.getCod();
 	}
 	
+	
+	public String getContato() {
+		return contato;
+	}
+
+	public void setContato(String contato) {
+		this.contato = contato;
+	}
+
 	public String getSenha() {
 		return senha;
 	}
@@ -187,5 +217,7 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 }

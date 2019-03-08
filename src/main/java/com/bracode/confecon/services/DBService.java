@@ -125,9 +125,9 @@ public class DBService {
 		Cidade c2 = new Cidade(null, "Goiânia", est2);
 		Cidade c3 = new Cidade(null, "Anapolis", est2);
 		
-		Cliente cli1 = new Cliente(null,"Leo Falcão", "leonardo@gmail.com", "31628382740", TipoCliente.PESSOA_FISICA, pe.encode("123"),  TipoUser.BASIC);
-		Cliente cli2 = new Cliente(null,"Lula Silva", "lula@gmail.com", "27660672134", TipoCliente.PESSOA_FISICA, pe.encode("123"), TipoUser.BASIC);
-		Cliente cli3 = new Cliente(null,"Leo Hawk", "leonardofalcaog@gmail.com", "89168070187", TipoCliente.PESSOA_FISICA, pe.encode("123"), TipoUser.BASIC);
+		Cliente cli1 = new Cliente(null,"Leo Falcão","Leo LTDA", "leonardo@gmail.com", "10795211000111", "152092370111", TipoCliente.PESSOA_JURIDICA, pe.encode("123"),  TipoUser.BASIC, "Marcelo");
+		Cliente cli2 = new Cliente(null,"Lula Silva", "Lula SA", "lula@gmail.com", "25206882000177", "152038695110", TipoCliente.PESSOA_JURIDICA, pe.encode("123"), TipoUser.BASIC, "Joao");
+		Cliente cli3 = new Cliente(null,"Leo Hawk", "Hawk LTDA", "leonardofalcaog@gmail.com", "04985151000105", "15607303111", TipoCliente.PESSOA_JURIDICA, pe.encode("123"), TipoUser.BASIC, "Joze");
 		
 		Endereco e1 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", cli1, c1);
 		Endereco e2 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", cli1, c1);

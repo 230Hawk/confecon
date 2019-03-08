@@ -18,16 +18,24 @@ public class ClienteNewDTO implements Serializable {
 	private String nome;
 	
 	@NotEmpty(message="Preenchimento obrigatorio.")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres.")
+	private String nomeFantasia;
+	
+	@NotEmpty(message="Preenchimento obrigatorio.")
 	@Email(message="Email inválido.")
 	private String email;
 	
 	@NotEmpty(message="Preenchimento obrigatorio.")
 	private String cpfCnpj;
-	private Integer tipo;
 	
+	@NotEmpty(message="Preenchimento obrigatorio.")
+	private String iEstadual;
+	private Integer tipo;
+		
 	@NotEmpty(message="Preenchimento obrigatorio.")
 	private String senha;
 	private Integer user;
+	private String contato;
 
 	@NotEmpty(message="Preenchimento obrigatorio.")
 	private String logradouro;
@@ -61,6 +69,15 @@ public class ClienteNewDTO implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
+	}
+
+
 	public String getEmail() {
 		return email;
 	}
@@ -75,6 +92,14 @@ public class ClienteNewDTO implements Serializable {
 
 	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
+	}
+	
+	public String getiEstadual() {
+		return iEstadual;
+	}
+
+	public void setiEstadual(String iEstadual) {
+		this.iEstadual = iEstadual;
 	}
 
 	public Integer getTipo() {
@@ -99,6 +124,14 @@ public class ClienteNewDTO implements Serializable {
 
 	public void setUser(Integer user) {
 		this.user = user;
+	}
+	
+	public String getContato() {
+		return contato;
+	}
+
+	public void setContato(String contato) {
+		this.contato = contato;
 	}
 
 	public String getLogradouro() {
