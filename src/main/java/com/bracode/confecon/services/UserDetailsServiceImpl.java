@@ -6,26 +6,26 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.bracode.confecon.domain.Cliente;
-import com.bracode.confecon.repositories.ClienteRepository;
+import com.bracode.confecon.domain.Usuario;
+import com.bracode.confecon.repositories.UsuarioRepository;
 import com.bracode.confecon.security.UserSS;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private UsuarioRepository usuarioRepository;
 	
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Cliente cli = clienteRepository.findByEmail(email);
-		if(cli == null) {
+		Usuario usuario = usuarioRepository.findByEmail(email);
+		if(usuario == null) {
 			throw new UsernameNotFoundException(email);
 		}
 		
 		
-		return new UserSS(cli.getId(), cli.getEmail());
+		return new UserSS(usuario.getId(), usuario.getEmail(), usuario.getSenha(), usuario.getPerfis());
 	}
 	
 	

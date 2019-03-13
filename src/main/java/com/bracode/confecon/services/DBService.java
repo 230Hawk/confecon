@@ -130,9 +130,9 @@ public class DBService {
 		Cidade c2 = new Cidade(null, "Goiânia", est2);
 		Cidade c3 = new Cidade(null, "Anapolis", est2);
 		
-		Cliente cli1 = new Cliente(null,"Leo Falcão","Leo LTDA", "leonardo@gmail.com", "10795211000111", "152092370111", TipoCliente.PESSOA_JURIDICA, "Marcelo");
-		Cliente cli2 = new Cliente(null,"Lula Silva", "Lula SA", "lula@gmail.com", "25206882000177", "152038695110", TipoCliente.PESSOA_JURIDICA, "Joao");
-		Cliente cli3 = new Cliente(null,"Leo Hawk", "Hawk LTDA", "leonardofalcaog@gmail.com", "04985151000105", "15607303111", TipoCliente.PESSOA_JURIDICA, "Joze");
+		Cliente cli1 = new Cliente(null,"Leo Falcão","Leo LTDA", "leonardocli@gmail.com", "10795211000111", "152092370111", TipoCliente.PESSOA_JURIDICA, "Marcelo");
+		Cliente cli2 = new Cliente(null,"Lula Silva", "Lula SA", "lulacli@gmail.com", "25206882000177", "152038695110", TipoCliente.PESSOA_JURIDICA, "Joao");
+		Cliente cli3 = new Cliente(null,"Leo Hawk", "Hawk LTDA", "leonardofalcaoclig@gmail.com", "04985151000105", "15607303111", TipoCliente.PESSOA_JURIDICA, "Joze");
 		
 		Usuario user1 = new Usuario(null,"ULeo Falcão", "leonardo@gmail.com", pe.encode("123"), TipoUser.ADMIN, "27660672134");
 		Usuario user2 = new Usuario(null,"ULula Silva", "lula@gmail.com", pe.encode("123"), TipoUser.AUXILIAR, "89168070187");

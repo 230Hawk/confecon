@@ -47,7 +47,9 @@ public class Usuario implements Serializable{
 	@CollectionTable(name = "TELEFONE_USUARIO")
 	private Set<String> telefones_usuario = new HashSet<>();
 	
-
+	public Usuario() {
+		addPerfil(Perfil.ADMIN);
+	}
 
 	
 	public Usuario(Integer id, String nome, String email, String senha,
@@ -59,10 +61,11 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 		this.user = (user==null) ? null : user.getCod();
 		this.cpf = cpf;
+		addPerfil(Perfil.ADMIN);
+		
 		
 	}
 
-	
 
 
 	public Integer getId() {

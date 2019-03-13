@@ -19,7 +19,7 @@ import com.bracode.confecon.services.validation.utils.BR;
 public class UsuarioInsertValidator implements ConstraintValidator<UsuarioInsert, UsuarioNewDTO> {
 	
 	@Autowired
-	private UsuarioRepository clienteRepository;
+	private UsuarioRepository usuarioRepository;
 	
 	@Override
 	public void initialize(UsuarioInsert ann) {
@@ -30,13 +30,13 @@ public class UsuarioInsertValidator implements ConstraintValidator<UsuarioInsert
 		List<FieldMessage> list = new ArrayList<>();
 
 		if ( !BR.isValidCPF(objDto.getCpf())) {
-			list.add(new FieldMessage("cpfCnpj", "CPF Inválido"));
+			list.add(new FieldMessage("cpf", "CPF Inválido"));
 		}
 		
 		
-		Usuario clienteAux = clienteRepository.findByEmail(objDto.getEmail());
+		Usuario usuarioAux = usuarioRepository.findByEmail(objDto.getEmail());
 		
-		if(clienteAux != null) {
+		if(usuarioAux != null) {
 			list.add(new FieldMessage("email", "Email já cadastrado"));
 		}
 		
