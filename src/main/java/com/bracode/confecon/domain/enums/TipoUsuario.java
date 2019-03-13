@@ -1,17 +1,14 @@
 package com.bracode.confecon.domain.enums;
 
-public enum TipoUser {
+public enum TipoUsuario {
 
-	ADMIN(1, "HOLE_ADMIN"),
-	PRODUCAO(2, "ROLE_PRODUCAO"),
-	REPRESENTANTE(3, "ROLE_REPRESENTANTE"),
-	AUXILIAR(4,"ROLE_AUXILIAR");
-	
+	PESSOA_FISICA(1, "Pessoa Física"),
+	PESSOA_JURIDICA(2, "Pessoa Jurídica");
 	
 	private int cod;
 	private String descricao;
 	
-	private TipoUser(int cod, String descricao) {
+	private TipoUsuario(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -24,13 +21,13 @@ public enum TipoUser {
 		return descricao;
 	}
 	
-	public static TipoUser toEnum(Integer cod) {
+	public static TipoUsuario toEnum(Integer cod) {
 		
 		if (cod == null) {
 			return null;
 		}
 		
-		for (TipoUser x : TipoUser.values()) {
+		for (TipoUsuario x : TipoUsuario.values()) {
 			if (cod.equals(x.getCod())) {
 				return x;
 			}

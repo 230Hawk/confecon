@@ -5,22 +5,18 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.bracode.confecon.domain.enums.Perfil;
 import com.bracode.confecon.domain.enums.TipoCliente;
-import com.bracode.confecon.domain.enums.TipoUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -39,9 +35,6 @@ public class Cliente implements Serializable {
 	private String iEstadual;
 	private Integer tipo;
 	
-	@JsonIgnore
-	private String senha;
-	private Integer user;
 	private String contato;
 
 	@OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL)
@@ -51,22 +44,14 @@ public class Cliente implements Serializable {
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
-	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name = "PERFIS")
-	private Set<Integer> perfis = new HashSet<>();
-	
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	
-	public Cliente() {
-		addPerfil(Perfil.FREE);
-	}
 
 	public Cliente(Integer id, String nome, String nomeFantasia, String email,
-			String cpfCnpj, String iEstadual, TipoCliente tipo, String senha,
-			TipoUser user, String contato) {
+			String cpfCnpj, String iEstadual, TipoCliente tipo,  String contato) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -75,10 +60,12 @@ public class Cliente implements Serializable {
 		this.cpfCnpj = cpfCnpj;
 		this.iEstadual = iEstadual;
 		this.tipo = (tipo==null) ? null : tipo.getCod();
-		this.senha = senha;
-		this.user = (tipo==null) ? null : user.getCod();
 		this.contato = contato;
-		addPerfil(Perfil.FREE);
+		
+	}
+	
+	public Cliente() {
+		
 	}
 
 	public Integer getId() {
@@ -136,14 +123,6 @@ public class Cliente implements Serializable {
 		this.tipo = tipo.getCod();
 	}
 
-	public TipoUser getUser() {
-		return TipoUser.toEnum(user);
-	}
-
-	public void setUser(TipoUser user) {
-		this.user = user.getCod();
-	}
-	
 	
 	public String getContato() {
 		return contato;
@@ -151,14 +130,6 @@ public class Cliente implements Serializable {
 
 	public void setContato(String contato) {
 		this.contato = contato;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public List<Endereco> getEnderecos() {
@@ -175,14 +146,6 @@ public class Cliente implements Serializable {
 
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
-	}
-	
-	public Set<Perfil> getPerfis(){
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
-	}
-	
-	public void addPerfil(Perfil perfil) {
-		perfis.add(perfil.getCod());
 	}
 	
 	public List<Pedido> getPedidos() {

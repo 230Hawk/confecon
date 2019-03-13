@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import com.bracode.confecon.services.validation.ClienteInsert;
 
 @ClienteInsert
-public class ClienteNewDTO implements Serializable {
+public class UsuarioNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@NotEmpty(message="Preenchimento obrigatorio.")
@@ -18,23 +18,19 @@ public class ClienteNewDTO implements Serializable {
 	private String nome;
 	
 	@NotEmpty(message="Preenchimento obrigatorio.")
-	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres.")
-	private String nomeFantasia;
-	
-	@NotEmpty(message="Preenchimento obrigatorio.")
 	@Email(message="Email inválido.")
 	private String email;
+
+	@NotEmpty(message="Preenchimento obrigatorio.")
+	private String senha;
 	
 	@NotEmpty(message="Preenchimento obrigatorio.")
-	private String cpfCnpj;
-	
+	private Integer user;
+
+
 	@NotEmpty(message="Preenchimento obrigatorio.")
-	private String iEstadual;
-	private Integer tipo;
-		
-
-	private String contato;
-
+	private String cpf;
+	
 	@NotEmpty(message="Preenchimento obrigatorio.")
 	private String logradouro;
 	
@@ -56,7 +52,7 @@ public class ClienteNewDTO implements Serializable {
 	
 	private Integer cidadeId;
 	
-	public ClienteNewDTO() {
+	public UsuarioNewDTO() {
 		}
 
 	public String getNome() {
@@ -67,14 +63,6 @@ public class ClienteNewDTO implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getNomeFantasia() {
-		return nomeFantasia;
-	}
-
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
-	}
-
 
 	public String getEmail() {
 		return email;
@@ -83,38 +71,31 @@ public class ClienteNewDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getCpfCnpj() {
-		return cpfCnpj;
+		
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setCpfCnpj(String cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
-	public String getiEstadual() {
-		return iEstadual;
+	public Integer getUser() {
+		return user;
 	}
 
-	public void setiEstadual(String iEstadual) {
-		this.iEstadual = iEstadual;
-	}
-
-	public Integer getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
+	public void setUser(Integer user) {
+		this.user = user;
 	}
 	
 	
-	public String getContato() {
-		return contato;
+
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setContato(String contato) {
-		this.contato = contato;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getLogradouro() {
@@ -189,8 +170,6 @@ public class ClienteNewDTO implements Serializable {
 		this.cidadeId = cidadeId;
 	}
 
-	
-	
-	
+		
 
 }

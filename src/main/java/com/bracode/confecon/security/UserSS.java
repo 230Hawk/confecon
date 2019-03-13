@@ -1,8 +1,6 @@
 package com.bracode.confecon.security;
 
 import java.util.Collection;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,12 +23,12 @@ public class UserSS implements UserDetails {
 	
 	
 	
-	public UserSS(Integer id, String email, String senha, Set<Perfil> perfis) {
+	public UserSS(Integer id, String email) {
 		super();
 		this.id = id;
 		this.email = email;
-		this.senha = senha;
-		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
+		
+		
 	}
 
 

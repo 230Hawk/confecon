@@ -4,6 +4,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.bracode.confecon.security.UserSS;
 
+
 public class UserService {
 
 	public static UserSS authenticated() {

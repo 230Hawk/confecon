@@ -11,7 +11,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +22,6 @@ import com.bracode.confecon.domain.dto.ClienteDTO;
 import com.bracode.confecon.domain.dto.ClienteNewDTO;
 import com.bracode.confecon.domain.enums.Perfil;
 import com.bracode.confecon.domain.enums.TipoCliente;
-import com.bracode.confecon.domain.enums.TipoUser;
 import com.bracode.confecon.repositories.ClienteRepository;
 import com.bracode.confecon.repositories.EnderecoRepository;
 import com.bracode.confecon.security.UserSS;
@@ -39,9 +37,6 @@ public class ClienteService {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-
-	@Autowired
-	private BCryptPasswordEncoder pe;
 
 	@Autowired
 	private S3Service s3Service;
@@ -120,14 +115,14 @@ public class ClienteService {
 	}
 
 	public Cliente fromDto(ClienteDTO objClienteDto) {
-		return new Cliente(objClienteDto.getId(), objClienteDto.getNome(), objClienteDto.getEmail(),null, null, null, null, null, null,
+		return new Cliente(objClienteDto.getId(), objClienteDto.getNome(), objClienteDto.getEmail(), null, null, null, null,
 				null);
 	}
 
 	public Cliente fromDto(ClienteNewDTO objClienteNewDto) {
 		Cliente cliente = new Cliente(null, objClienteNewDto.getNome(), objClienteNewDto.getNomeFantasia(), objClienteNewDto.getEmail(),
 				objClienteNewDto.getCpfCnpj(), objClienteNewDto.getiEstadual(), TipoCliente.toEnum(objClienteNewDto.getTipo()),
-				pe.encode(objClienteNewDto.getSenha()), TipoUser.toEnum(objClienteNewDto.getUser()), objClienteNewDto.getContato());
+				 objClienteNewDto.getContato());
 
 		Cidade cidade = new Cidade(objClienteNewDto.getCidadeId(), null, null);
 

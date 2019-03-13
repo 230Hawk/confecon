@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.bracode.confecon.domain.Cidade;
 import com.bracode.confecon.domain.Cliente;
 import com.bracode.confecon.domain.Endereco;
+import com.bracode.confecon.domain.EnderecoUsuario;
 import com.bracode.confecon.domain.Estado;
 import com.bracode.confecon.domain.Grupo;
 import com.bracode.confecon.domain.ItemPedido;
@@ -21,6 +22,7 @@ import com.bracode.confecon.domain.PagamentoCartao;
 import com.bracode.confecon.domain.Pedido;
 import com.bracode.confecon.domain.Produto;
 import com.bracode.confecon.domain.Situacao;
+import com.bracode.confecon.domain.Usuario;
 import com.bracode.confecon.domain.enums.EstadoPagamento;
 import com.bracode.confecon.domain.enums.Perfil;
 import com.bracode.confecon.domain.enums.TipoCliente;
@@ -36,6 +38,7 @@ import com.bracode.confecon.repositories.PagamentoRepository;
 import com.bracode.confecon.repositories.PedidoRepository;
 import com.bracode.confecon.repositories.ProdutoRepository;
 import com.bracode.confecon.repositories.SituacaoRepository;
+import com.bracode.confecon.repositories.UsuarioRepository;
 
 
 @Service
@@ -57,6 +60,8 @@ public class DBService {
 	private CidadeRepository cidadeRepository;
 	@Autowired
 	private ClienteRepository clienteRepository;
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	@Autowired
@@ -125,15 +130,24 @@ public class DBService {
 		Cidade c2 = new Cidade(null, "Goiânia", est2);
 		Cidade c3 = new Cidade(null, "Anapolis", est2);
 		
-		Cliente cli1 = new Cliente(null,"Leo Falcão","Leo LTDA", "leonardo@gmail.com", "10795211000111", "152092370111", TipoCliente.PESSOA_JURIDICA, pe.encode("123"),  TipoUser.BASIC, "Marcelo");
-		Cliente cli2 = new Cliente(null,"Lula Silva", "Lula SA", "lula@gmail.com", "25206882000177", "152038695110", TipoCliente.PESSOA_JURIDICA, pe.encode("123"), TipoUser.BASIC, "Joao");
-		Cliente cli3 = new Cliente(null,"Leo Hawk", "Hawk LTDA", "leonardofalcaog@gmail.com", "04985151000105", "15607303111", TipoCliente.PESSOA_JURIDICA, pe.encode("123"), TipoUser.BASIC, "Joze");
+		Cliente cli1 = new Cliente(null,"Leo Falcão","Leo LTDA", "leonardo@gmail.com", "10795211000111", "152092370111", TipoCliente.PESSOA_JURIDICA, "Marcelo");
+		Cliente cli2 = new Cliente(null,"Lula Silva", "Lula SA", "lula@gmail.com", "25206882000177", "152038695110", TipoCliente.PESSOA_JURIDICA, "Joao");
+		Cliente cli3 = new Cliente(null,"Leo Hawk", "Hawk LTDA", "leonardofalcaog@gmail.com", "04985151000105", "15607303111", TipoCliente.PESSOA_JURIDICA, "Joze");
+		
+		Usuario user1 = new Usuario(null,"ULeo Falcão", "leonardo@gmail.com", pe.encode("123"), TipoUser.ADMIN, "27660672134");
+		Usuario user2 = new Usuario(null,"ULula Silva", "lula@gmail.com", pe.encode("123"), TipoUser.AUXILIAR, "89168070187");
+		
 		
 		Endereco e1 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", cli1, c1);
 		Endereco e2 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", cli1, c1);
 		Endereco e3 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", cli2, c2);
 		Endereco e4 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", cli2, c3);
 		Endereco e5 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", cli3, c3);
+		
+		EnderecoUsuario eu1 = new EnderecoUsuario(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", user1, c1);
+		EnderecoUsuario eu2 = new EnderecoUsuario(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", user1, c1);
+		EnderecoUsuario eu3 = new EnderecoUsuario(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", user2, c2);
+		EnderecoUsuario eu4 = new EnderecoUsuario(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", user2, c3);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
@@ -241,10 +255,16 @@ public class DBService {
 		cli2.getTelefones().addAll(Arrays.asList("32584564", "32592829"));
 		cli3.getTelefones().addAll(Arrays.asList("9984564", "96592829"));
 		
+		user1.getTelefones().addAll(Arrays.asList("32584562"));
+		user2.getTelefones().addAll(Arrays.asList("32584563"));
+		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 		cli2.getEnderecos().addAll(Arrays.asList(e3, e4));
 		cli3.getEnderecos().addAll(Arrays.asList(e5));
-		cli3.addPerfil(Perfil.ADMIN);
+		
+		user1.getEnderecos_usuario().addAll(Arrays.asList(eu1, eu2));
+		user2.getEnderecos_usuario().addAll(Arrays.asList(eu3, eu4));
+		user2.addPerfil(Perfil.ADMIN);
 		
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		ped1.setPagamento(pagto1);
@@ -271,6 +291,8 @@ public class DBService {
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
 		clienteRepository.saveAll(Arrays.asList(cli1, cli2, cli3));
+		
+		usuarioRepository.saveAll(Arrays.asList(user1, user2));
 		
 		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3, e4, e5));
 		
