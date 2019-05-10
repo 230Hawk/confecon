@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.bracode.confecon.domain.enums.Perfil;
+import com.bracode.confecon.domain.enums.TipoUser;
 
 public class UserSS implements UserDetails {
 	private static final long serialVersionUID = 1L;
@@ -25,12 +25,12 @@ public class UserSS implements UserDetails {
 	
 	
 	
-	public UserSS(Integer id, String email, String senha, Set<Perfil> perfis) {
+	public UserSS(Integer id, String email, String senha, Set<TipoUser> tipoUser) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
-		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
+		this.authorities = tipoUser.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
 
 
@@ -76,8 +76,8 @@ public class UserSS implements UserDetails {
 		return true;
 	}
 
-	public boolean hasRole(Perfil perfil) {
-		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+	public boolean hasRole(TipoUser tipoUser) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(tipoUser.getDescricao()));
 	}
 	
 	

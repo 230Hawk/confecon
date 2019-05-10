@@ -1,7 +1,9 @@
 package com.bracode.confecon.domain.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.bracode.confecon.domain.Grupo;
 import com.bracode.confecon.domain.Produto;
 
 public class ProdutoDTO  implements Serializable{
@@ -14,6 +16,14 @@ public class ProdutoDTO  implements Serializable{
 	private String aplicacao;
 	private Double frete;
 	private Double preco;
+	
+	private List<Grupo> grupos;
+	//private List<Integer> marcas;
+	//private List<Integer> situacoes;
+	
+	
+	
+	
 
 	public ProdutoDTO(Produto objProduto) {
 		id = objProduto.getId();
@@ -23,6 +33,8 @@ public class ProdutoDTO  implements Serializable{
 		aplicacao = objProduto.getAplicacao();
 		frete = objProduto.getFrete();
 		preco = objProduto.getPreco();
+		grupos = objProduto.getGrupos();
+	
 	}
 	
 	
@@ -82,6 +94,20 @@ public class ProdutoDTO  implements Serializable{
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
+
+
+
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+
+
+
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+
 	
+
 	
 }

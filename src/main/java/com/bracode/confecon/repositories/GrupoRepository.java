@@ -7,6 +7,8 @@ import com.bracode.confecon.domain.Grupo;
 
 @Repository
 public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
+
+
 	
 	//public Page<Grupo> findAll(Pageable pageRequest);
 	

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.bracode.confecon.domain.Cidade;
 import com.bracode.confecon.domain.Cliente;
 import com.bracode.confecon.domain.Endereco;
-import com.bracode.confecon.domain.EnderecoUsuario;
 import com.bracode.confecon.domain.Estado;
 import com.bracode.confecon.domain.Grupo;
 import com.bracode.confecon.domain.ItemPedido;
@@ -24,7 +23,6 @@ import com.bracode.confecon.domain.Produto;
 import com.bracode.confecon.domain.Situacao;
 import com.bracode.confecon.domain.Usuario;
 import com.bracode.confecon.domain.enums.EstadoPagamento;
-import com.bracode.confecon.domain.enums.Perfil;
 import com.bracode.confecon.domain.enums.TipoCliente;
 import com.bracode.confecon.domain.enums.TipoUser;
 import com.bracode.confecon.repositories.CidadeRepository;
@@ -78,50 +76,43 @@ public class DBService {
 	public void instantiateTestDataBase() throws ParseException {
 		
 		
-		Produto p1 = new Produto(null, "111", "Amortecedor", "Amortecedor 1", "Gol G5", 10.00, 100.00);
-		Produto p2 = new Produto(null, "222", "Mola", "Mola 2", "Gol G5", 20.00, 200.00);
-		Produto p3 = new Produto(null, "333", "Balança", "Balança 3", "Gol G5", 30.00, 300.00);
-		Produto p4 = new Produto(null, "444", "Coxim", "Coxim 4", "Gol G5", 40.00, 400.00);
-		Produto p5 = new Produto(null, "555", "Barra", "Barra 5", "Gol G5", 50.00, 500.00);
-		Produto p6 = new Produto(null, "666", "Rolamento", "Rolamento 6", "Gol G5", 60.00, 600.00);
-		Produto p7 = new Produto(null, "777", "Capo", "Capo 7", "Gol G5", 70.00, 700.00);
-		Produto p8 = new Produto(null, "888", "Porta", "Porta 8", "Gol G5", 80.00, 800.00);
-		Produto p9 = new Produto(null, "999", "Paralama", "Paralama 9", "Gol G5", 90.00, 900.00);
-		Produto p10 = new Produto(null, "101010", "Parachoque", "Parachoque 10", "Gol G5", 100.00, 1000.00);
-		Produto p11 = new Produto(null, "111111", "Tampa", "Tampa 11", "Gol G5", 110.00, 1100.00);
-		Produto p12 = new Produto(null, "121212", "Teto", "Teto 12", "Gol G5", 120.00, 1200.00);
-		Produto p13 = new Produto(null, "111", "Amortecedor", "Amortecedor 1", "Gol G6", 10.00, 100.00);
-		Produto p14 = new Produto(null, "222", "Mola", "Mola 2", "Gol G6", 20.00, 200.00);
-		Produto p15 = new Produto(null, "333", "Balança", "Balança 3", "Gol G6", 30.00, 300.00);
-		Produto p16 = new Produto(null, "444", "Coxim", "Coxim 4", "Gol G6", 40.00, 400.00);
-		Produto p17 = new Produto(null, "555", "Barra", "Barra 5", "Gol G6", 50.00, 500.00);
-		Produto p18 = new Produto(null, "666", "Rolamento", "Rolamento 6", "Gol G6", 60.00, 600.00);
-		Produto p19 = new Produto(null, "777", "Capo", "Capo 7", "Gol G6", 70.00, 700.00);
-		Produto p20 = new Produto(null, "888", "Porta", "Porta 8", "Gol G6", 80.00, 800.00);
-		Produto p21 = new Produto(null, "999", "Paralama", "Paralama 9", "Gol G6", 90.00, 900.00);
-		Produto p22 = new Produto(null, "101010", "Parachoque", "Parachoque 10", "Gol G6", 100.00, 1000.00);
-		Produto p23 = new Produto(null, "111111", "Tampa", "Tampa 11", "Gol G6", 110.00, 1100.00);
-		Produto p24 = new Produto(null, "121212", "Teto", "Teto 12", "Gol G6", 120.00, 1200.00);
+		Produto p1 = new Produto(null, "111", "Calça 01", "Calça modelo 01", "Vestuario", 10.00, 100.00);
+		Produto p2 = new Produto(null, "222", "Calça 02", "Calça modelo 02", "Vestuario", 20.00, 200.00);
+		Produto p3 = new Produto(null, "333", "Calça 03", "Calça modelo 03", "Vestuario", 30.00, 300.00);
+		Produto p4 = new Produto(null, "444", "Calça 04", "Calça modelo 04", "Vestuario", 40.00, 400.00);
+		Produto p5 = new Produto(null, "555", "Calça 05", "Calça modelo 05", "Vestuario", 50.00, 500.00);
+		Produto p6 = new Produto(null, "666", "Calça 06", "Calça modelo 06", "Vestuario", 60.00, 600.00);
+		Produto p7 = new Produto(null, "777", "Calça 07", "Calça modelo 07", "Vestuario", 70.00, 700.00);
+		Produto p8 = new Produto(null, "888", "Camiseta 01", "Camiseta modelo 01", "Vestuario", 80.00, 800.00);
+		Produto p9 = new Produto(null, "999", "Camiseta 02", "Camiseta modelo 02", "Vestuario", 90.00, 900.00);
+		Produto p10 = new Produto(null, "101010", "Camiseta 03", "Camiseta modelo 03", "Vestuario", 100.00, 1000.00);
+		Produto p11 = new Produto(null, "111111", "Camiseta 04", "Camiseta modelo 04", "Vestuario", 110.00, 1100.00);
+		Produto p12 = new Produto(null, "121212", "Camiseta 05", "Camiseta modelo 05", "Vestuario", 120.00, 1200.00);
+		Produto p13 = new Produto(null, "111", "Camiseta 06", "Camiseta modelo 06", "Vestuario", 10.00, 100.00);
+		Produto p14 = new Produto(null, "222", "Camiseta 07", "Camiseta modelo 07", "Vestuario", 20.00, 200.00);
+		Produto p15 = new Produto(null, "222", "Camiseta 08", "Camiseta modelo 08", "Vestuario", 20.00, 200.00);
+		Produto p16 = new Produto(null, "444", "Boné 01", "Boné modelo 01", "Acessório", 40.00, 400.00);
+		Produto p17 = new Produto(null, "555", "Boné 02", "Boné modelo 02", "Acessório", 50.00, 500.00);
+		Produto p18 = new Produto(null, "666", "Boné 03", "Boné Modelo 03", "Acessório", 60.00, 600.00);
+		Produto p19 = new Produto(null, "777", "Butina 01", "Butina modelo 01", "Calçado", 70.00, 700.00);
+		Produto p20 = new Produto(null, "888", "Butina 02", "Butina modelo 01", "Calçado", 80.00, 800.00);
+		Produto p21 = new Produto(null, "999", "Butina 03", "Butina modelo 01", "Calçado", 90.00, 900.00);
+		Produto p22 = new Produto(null, "101010", "Bota 01", "Butina modelo 01", "Calçado", 100.00, 1000.00);
+		Produto p23 = new Produto(null, "111111", "Bota 02", "Butina modelo 01", "Calçado", 110.00, 1100.00);
+		Produto p24 = new Produto(null, "121212", "Bota 03", "Butina modelo 01", "Calçado", 120.00, 1200.00);
 		
 		
-		Grupo  grupo1 = new Grupo(null, "Suspenção");
-		Grupo  grupo2 = new Grupo(null, "Lataria");
-		Grupo  grupo3 = new Grupo(null, "Injeção");
-		Grupo  grupo4 = new Grupo(null, "Acessórios");
-		Grupo  grupo5 = new Grupo(null, "Pneus");
-		Grupo  grupo6 = new Grupo(null, "Motor");
-		Grupo  grupo7 = new Grupo(null, "Sensores");
-		Grupo  grupo8 = new Grupo(null, "Sondas");
-		Grupo  grupo9 = new Grupo(null, "Exaustão");
-		Grupo  grupo10 = new Grupo(null, "Molas");
-		Grupo  grupo11 = new Grupo(null, "Turbo");
-		Grupo  grupo12 = new Grupo(null, "ECU");
+		Grupo  grupo1 = new Grupo(null, "Vestuario");
+		Grupo  grupo2 = new Grupo(null, "Acessório");
+		Grupo  grupo3 = new Grupo(null, "Calçado");
 		
-		Marca marca1 = new Marca(null, "Ford");
-		Marca marca2 = new Marca(null, "GM");
+	
 		
-		Situacao situacao1 = new Situacao(null, "Nova");
-		Situacao situacao2 = new Situacao(null, "Usada");
+		Marca marca1 = new Marca(null, "Laço");
+		Marca marca2 = new Marca(null, "Compenhagem");
+		
+		Situacao situacao1 = new Situacao(null, "Estoque");
+		Situacao situacao2 = new Situacao(null, "Produção");
 		
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "Goias");
@@ -134,20 +125,19 @@ public class DBService {
 		Cliente cli2 = new Cliente(null,"Lula Silva", "Lula SA", "lulacli@gmail.com", "25206882000177", "152038695110", TipoCliente.PESSOA_JURIDICA, "Joao");
 		Cliente cli3 = new Cliente(null,"Leo Hawk", "Hawk LTDA", "leonardofalcaoclig@gmail.com", "04985151000105", "15607303111", TipoCliente.PESSOA_JURIDICA, "Joze");
 		
-		Usuario user1 = new Usuario(null,"ULeo Falcão", "leonardo@gmail.com", pe.encode("123"), TipoUser.ADMIN, "27660672134");
-		Usuario user2 = new Usuario(null,"ULula Silva", "lula@gmail.com", pe.encode("123"), TipoUser.AUXILIAR, "89168070187");
+		Usuario user1 = new Usuario(null,"ULeo Falcão", "leonardo@gmail.com", pe.encode("123"), "27660672134");
+		Usuario user2 = new Usuario(null,"UAuxLula Silva", "lulaAux@gmail.com", pe.encode("123"),"89168070187");
+		Usuario user3 = new Usuario(null,"URepLula Silva", "lulaRep@gmail.com", pe.encode("123"),"89168070187");
+		Usuario user4 = new Usuario(null,"UProLula Silva", "lulaPro@gmail.com", pe.encode("123"),"89168070187");
 		
 		
-		Endereco e1 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", cli1, c1);
-		Endereco e2 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", cli1, c1);
-		Endereco e3 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", cli2, c2);
-		Endereco e4 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", cli2, c3);
-		Endereco e5 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", cli3, c3);
+		Endereco e1 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", cli1, null, null, c1);
+		Endereco e2 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", cli1, null, null, c1);
+		Endereco e3 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", cli2, null, null, c2);
+		Endereco e4 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", cli2, null, null, c3);
+		Endereco e5 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", cli3, null, null,c3);
 		
-		EnderecoUsuario eu1 = new EnderecoUsuario(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", user1, c1);
-		EnderecoUsuario eu2 = new EnderecoUsuario(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", user1, c1);
-		EnderecoUsuario eu3 = new EnderecoUsuario(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", user2, c2);
-		EnderecoUsuario eu4 = new EnderecoUsuario(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", user2, c3);
+		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
@@ -162,7 +152,8 @@ public class DBService {
 		ItemPedido ip3 = new ItemPedido(ped2, p3, 0.00, 3, 30.00, 300.00);
 		
 		grupo1.getProdutos().addAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p13, p14, p15, p16, p17, p18));
-		grupo2.getProdutos().addAll(Arrays.asList(p7, p8, p9, p10, p11, p12, p19, p20, p21, p22, p23, p24));
+		grupo2.getProdutos().addAll(Arrays.asList(p7, p8, p9, p10, p11, p12 ));
+		grupo3.getProdutos().addAll(Arrays.asList(p19, p20, p21, p22, p23, p24));
 		
 		marca1.getProdutos().addAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p13, p14, p15, p16, p17, p18));
 		marca2.getProdutos().addAll(Arrays.asList(p7, p8, p9, p10, p11, p12, p19, p20, p21, p22, p23, p24));
@@ -170,13 +161,13 @@ public class DBService {
 		situacao1.getProdutos().addAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p13, p14, p15, p16, p17, p18));
 		situacao2.getProdutos().addAll(Arrays.asList(p7, p8, p9, p10, p11, p12, p19, p20, p21, p22, p23, p24));
 				
-		p1.getGrupos().addAll(Arrays.asList(grupo1, grupo7));
+		p1.getGrupos().addAll(Arrays.asList(grupo1));
 		p2.getGrupos().addAll(Arrays.asList(grupo1));
 		p3.getGrupos().addAll(Arrays.asList(grupo1));
 		p4.getGrupos().addAll(Arrays.asList(grupo1));
 		p5.getGrupos().addAll(Arrays.asList(grupo1));
 		p6.getGrupos().addAll(Arrays.asList(grupo1));
-		p13.getGrupos().addAll(Arrays.asList(grupo1, grupo7));
+		p13.getGrupos().addAll(Arrays.asList(grupo1));
 		p14.getGrupos().addAll(Arrays.asList(grupo1));
 		p15.getGrupos().addAll(Arrays.asList(grupo1));
 		p16.getGrupos().addAll(Arrays.asList(grupo1));
@@ -257,14 +248,23 @@ public class DBService {
 		
 		user1.getTelefones().addAll(Arrays.asList("32584562"));
 		user2.getTelefones().addAll(Arrays.asList("32584563"));
+		user3.getTelefones().addAll(Arrays.asList("32584562"));
+		user4.getTelefones().addAll(Arrays.asList("32584563"));
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 		cli2.getEnderecos().addAll(Arrays.asList(e3, e4));
 		cli3.getEnderecos().addAll(Arrays.asList(e5));
 		
-		user1.getEnderecos_usuario().addAll(Arrays.asList(eu1, eu2));
-		user2.getEnderecos_usuario().addAll(Arrays.asList(eu3, eu4));
-		user2.addPerfil(Perfil.ADMIN);
+		user1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		user2.getEnderecos().addAll(Arrays.asList(e3, e4));
+		user3.getEnderecos().addAll(Arrays.asList(e1, e2));
+		user4.getEnderecos().addAll(Arrays.asList(e3, e4));
+		
+		user1.addTipoUser(TipoUser.ADMIN);
+		user1.addTipoUser(TipoUser.AUXILIAR);
+		user1.addTipoUser(TipoUser.PRODUCAO);
+		user1.addTipoUser(TipoUser.REPRESENTANTE);
+		
 		
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		ped1.setPagamento(pagto1);
@@ -278,7 +278,7 @@ public class DBService {
 		p3.getItens().addAll(Arrays.asList(ip3));
 		
 				
-		grupoRepository.saveAll(Arrays.asList(grupo1, grupo2, grupo3, grupo4, grupo5, grupo6, grupo7, grupo8, grupo9, grupo10, grupo11, grupo12));
+		grupoRepository.saveAll(Arrays.asList(grupo1, grupo2, grupo3));
 		
 		marcaRepository.saveAll(Arrays.asList(marca1, marca2));
 

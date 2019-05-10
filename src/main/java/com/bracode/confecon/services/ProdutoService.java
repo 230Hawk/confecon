@@ -75,8 +75,11 @@ public class ProdutoService {
 	@Transactional
 	public Produto insert(Produto objProduto){
 		objProduto.setId(null);
+		objProduto.setGrupos(objProduto.getGrupos());
 		objProduto = produtoRepository.save(objProduto);
-		//enderecoRepository.saveAll(objProduto.getEnderecos());
+		System.out.println(objProduto.getDescricao());
+		System.out.println(objProduto.getGrupos());
+		grupoRepository.saveAll(objProduto.getGrupos());
 		return objProduto;
 		
 	}

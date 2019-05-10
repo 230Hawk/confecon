@@ -38,5 +38,10 @@ public enum TipoUser {
 		
 		throw new IllegalArgumentException("Id inválido: " + cod);
 	}
+
+	public void add(int cod2) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

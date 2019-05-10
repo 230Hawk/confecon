@@ -69,6 +69,8 @@ public class Produto implements Serializable{
 		this.aplicacao = aplicacao;
 		this.frete = frete;
 		this.preco = preco;
+		
+	
 	}
 	
 	@JsonIgnore

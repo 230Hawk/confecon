@@ -20,8 +20,8 @@ import com.bracode.confecon.domain.Cliente;
 import com.bracode.confecon.domain.Endereco;
 import com.bracode.confecon.domain.dto.ClienteDTO;
 import com.bracode.confecon.domain.dto.ClienteNewDTO;
-import com.bracode.confecon.domain.enums.Perfil;
 import com.bracode.confecon.domain.enums.TipoCliente;
+
 import com.bracode.confecon.repositories.ClienteRepository;
 import com.bracode.confecon.repositories.EnderecoRepository;
 import com.bracode.confecon.security.UserSS;
@@ -52,11 +52,14 @@ public class ClienteService {
 
 	public Cliente find(Integer id) {
 
-		UserSS user = UserService.authenticated();
+		
 
-		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-			throw new AuthorizationException("Acesso negado!");
-		}
+		/*
+		 * UserSS user = UserService.authenticated();
+		 * if (user == null || !user.hasRole(TipoUser.ADMIN) &&
+		 * !id.equals(user.getId())) { throw new
+		 * AuthorizationException("Acesso negado!"); }
+		 */
 
 		Optional<Cliente> objcliente = clienteRepository.findById(id);
 		return objcliente.orElseThrow(() -> new ObjectNotFoundException(
@@ -94,19 +97,7 @@ public class ClienteService {
 
 	}
 
-	public Cliente findByEmail(String email) {
-		UserSS user = UserService.authenticated();
-
-		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
-			throw new AuthorizationException("Acesso negado!");
-		}
-		Cliente cliente = clienteRepository.findByEmail(email);
-		if(cliente == null) {
-			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + user.getId() + "Tipo: " + Cliente.class.getName());
-		}
-		return cliente;
-	}
-
+	
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);

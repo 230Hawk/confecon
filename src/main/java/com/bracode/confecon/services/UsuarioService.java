@@ -17,13 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bracode.confecon.domain.Cidade;
-import com.bracode.confecon.domain.EnderecoUsuario;
+import com.bracode.confecon.domain.Endereco;
 import com.bracode.confecon.domain.Usuario;
 import com.bracode.confecon.domain.dto.UsuarioDTO;
 import com.bracode.confecon.domain.dto.UsuarioNewDTO;
-import com.bracode.confecon.domain.enums.Perfil;
 import com.bracode.confecon.domain.enums.TipoUser;
-import com.bracode.confecon.repositories.EnderecoUsuarioRepository;
 import com.bracode.confecon.repositories.UsuarioRepository;
 import com.bracode.confecon.security.UserSS;
 import com.bracode.confecon.services.exceptions.AuthorizationException;
@@ -35,9 +33,6 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-
-	@Autowired
-	private EnderecoUsuarioRepository enderecoUsuarioRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder pe;
@@ -58,7 +53,7 @@ public class UsuarioService {
 
 		UserSS user = UserService.authenticated();
 
-		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+		if (user == null || !user.hasRole(TipoUser.ADMIN) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado!");
 		}
 
@@ -71,7 +66,7 @@ public class UsuarioService {
 	public Usuario insert(Usuario objUsuario) {
 		objUsuario.setId(null);
 		objUsuario = usuarioRepository.save(objUsuario);
-		enderecoUsuarioRepository.saveAll(objUsuario.getEnderecos_usuario());
+		//enderecoUsuarioRepository.saveAll(objUsuario.getEnderecos_usuario());
 		return objUsuario;
 
 	}
@@ -101,7 +96,7 @@ public class UsuarioService {
 	public Usuario findByEmail(String email) {
 		UserSS user = UserService.authenticated();
 
-		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+		if (user == null || !user.hasRole(TipoUser.ADMIN) && !email.equals(user.getUsername())) {
 			throw new AuthorizationException("Acesso negado!");
 		}
 		Usuario usuario = usuarioRepository.findByEmail(email);
@@ -120,19 +115,19 @@ public class UsuarioService {
 
 	public Usuario fromDto(UsuarioDTO objUsuarioDto) {
 		return new Usuario(objUsuarioDto.getId(), objUsuarioDto.getNome(),
-				objUsuarioDto.getEmail(), null, null, null);
+				objUsuarioDto.getEmail(), null, null);
 	}
 
 	public Usuario fromDto(UsuarioNewDTO objUsuarioNewDto) {
 		Usuario usuario = new Usuario(null, objUsuarioNewDto.getNome(), objUsuarioNewDto.getEmail(), pe.encode(objUsuarioNewDto.getSenha()),
-				TipoUser.toEnum(objUsuarioNewDto.getUser()), objUsuarioNewDto.getCpf());
+				objUsuarioNewDto.getCpf());
 
 		Cidade cidade = new Cidade(objUsuarioNewDto.getCidadeId(), null, null);
 
-		EnderecoUsuario endereco_usuario = new EnderecoUsuario(null, objUsuarioNewDto.getLogradouro(), objUsuarioNewDto.getNumero(),
-				objUsuarioNewDto.getComplemento(), objUsuarioNewDto.getBairro(), objUsuarioNewDto.getCep(), usuario,
-				cidade);
-		usuario.getEnderecos_usuario().add(endereco_usuario);
+		Endereco endereco_usuario = new Endereco(null, objUsuarioNewDto.getLogradouro(), objUsuarioNewDto.getNumero(),
+				objUsuarioNewDto.getComplemento(), objUsuarioNewDto.getBairro(), objUsuarioNewDto.getCep(), null, usuario,
+				null, cidade);
+		usuario.getEnderecos().add(endereco_usuario);
 		usuario.getTelefones().add(objUsuarioNewDto.getTelefone1());
 		if (objUsuarioNewDto.getTelefone2() != null) {
 			usuario.getTelefones().add(objUsuarioNewDto.getTelefone2());

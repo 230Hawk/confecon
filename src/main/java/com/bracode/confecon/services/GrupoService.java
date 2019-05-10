@@ -28,9 +28,15 @@ public class GrupoService {
 		"Objeto não encontrado! Id: " + id + ", Tipo: " + Grupo.class.getName()));
 	}
 	
+	
 	public Grupo insert(Grupo objGrupo){
 		objGrupo.setId(null);
 		return grupoRepository.save(objGrupo);
+		
+	}
+	
+	public List<Grupo> insertListGrupo(List<Grupo> lista){
+		return grupoRepository.saveAll(lista);
 		
 	}
 	

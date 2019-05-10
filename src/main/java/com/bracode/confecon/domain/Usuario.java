@@ -15,13 +15,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
-
-import com.bracode.confecon.domain.enums.Perfil;
 import com.bracode.confecon.domain.enums.TipoUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type") 
 public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -33,39 +36,39 @@ public class Usuario implements Serializable{
 	
 	@JsonIgnore
 	private String senha;
-	private Integer user;
 	private String cpf;
 	
 	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name = "PERFIS")
-	private Set<Integer> perfis = new HashSet<>();
+	@CollectionTable(name = "TIPOUSER")
+	private Set<Integer> tipouser = new HashSet<>();
 	
 	@OneToMany(mappedBy = "usuario", cascade=CascadeType.ALL)
-	private List<EnderecoUsuario> enderecos_usuario = new ArrayList<>();
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE_USUARIO")
 	private Set<String> telefones_usuario = new HashSet<>();
 	
 	public Usuario() {
-		addPerfil(Perfil.ADMIN);
+		
 	}
 
 	
 	public Usuario(Integer id, String nome, String email, String senha,
-			TipoUser user, String cpf) {
+			 String cpf) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.user = (user==null) ? null : user.getCod();
 		this.cpf = cpf;
-		addPerfil(Perfil.ADMIN);
-		
-		
+		addTipoUser(TipoUser.AUXILIAR);
+
 	}
 
+
+
+	
 
 
 	public Integer getId() {
@@ -94,13 +97,19 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 	
-	public Integer getUser() {
-		return user;
+
+	public Set<TipoUser> getTipouser() {
+		return tipouser.stream().map(x -> TipoUser.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void setUser(Integer user) {
-		this.user = user;
+	public void setTipouser(Set<Integer> tipouser) {
+		this.tipouser = tipouser;
 	}
+	
+	public void addTipoUser(TipoUser tipoUser) {
+		tipoUser.add(tipoUser.getCod());
+	}
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -109,12 +118,13 @@ public class Usuario implements Serializable{
 	}
 
 
-	public List<EnderecoUsuario> getEnderecos_usuario() {
-		return enderecos_usuario;
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEnderecos_usuario(List<EnderecoUsuario> enderecos_usuario) {
-		this.enderecos_usuario = enderecos_usuario;
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 
@@ -125,15 +135,7 @@ public class Usuario implements Serializable{
 	public void setTelefones(Set<String> telefones) {
 		this.telefones_usuario = telefones;
 	}
-	
-	public Set<Perfil> getPerfis(){
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
-	}
-	
-	public void addPerfil(Perfil perfil) {
-		perfis.add(perfil.getCod());
-	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

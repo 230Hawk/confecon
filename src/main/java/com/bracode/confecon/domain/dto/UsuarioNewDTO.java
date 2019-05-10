@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -24,33 +25,35 @@ public class UsuarioNewDTO implements Serializable {
 	@NotEmpty(message="Preenchimento obrigatorio.")
 	private String senha;
 	
-	@NotEmpty(message="Preenchimento obrigatorio.")
+	@NotNull(message="Preenchimento obrigatorio.")
 	private Integer user;
 
 
 	@NotEmpty(message="Preenchimento obrigatorio.")
 	private String cpf;
 	
-	@NotEmpty(message="Preenchimento obrigatorio.")
+	//@NotEmpty(message="Preenchimento obrigatorio.")
 	private String logradouro;
 	
-	@NotEmpty(message="Preenchimento obrigatorio.")
+	//@NotEmpty(message="Preenchimento obrigatorio.")
 	private String numero;
 	
 	private String complemento;
 	
-	@NotEmpty(message="Preenchimento obrigatorio.")
+	//@NotEmpty(message="Preenchimento obrigatorio.")
 	private String bairro;
 	
-	@NotEmpty(message="Preenchimento obrigatorio.")
+	//@NotEmpty(message="Preenchimento obrigatorio.")
 	private String cep;
 	
-	@NotEmpty(message="Preenchimento obrigatorio.")
+	//@NotEmpty(message="Preenchimento obrigatorio.")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
 	
 	private Integer cidadeId;
+	
+	
 	
 	public UsuarioNewDTO() {
 		}

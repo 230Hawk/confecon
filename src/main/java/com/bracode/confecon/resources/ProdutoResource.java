@@ -27,7 +27,7 @@ public class ProdutoResource {
 	@Autowired
 	private ProdutoService produtoService;
 	
-/*	@Autowired
+/*  @Autowired
 	private GrupoService grupoService;
 	
 	@Autowired
@@ -48,6 +48,7 @@ public class ProdutoResource {
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Produto objProduto) {
 		objProduto = produtoService.insert(objProduto);
+		System.out.println(objProduto.getGrupos());
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(objProduto.getId()).toUri();	
 		return ResponseEntity.created(uri).build();

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Grupo  implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +22,7 @@ public class Grupo  implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "grupos")
 	private List<Produto> produtos = new ArrayList<>();
 	
