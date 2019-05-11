@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.bracode.confecon.domain.enums.TipoJuridico;
 
 
 @Entity
@@ -40,19 +41,13 @@ public class Fornecedor implements Serializable {
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE")
+	@CollectionTable(name = "TELEFONE_FORNECEDOR")
 	private Set<String> telefones = new HashSet<>();
-	
 
 	
-	public Fornecedor() {
-		
-	}
-	
-	
 
-	public Fornecedor(Integer id, String nome, String nomeFantasia, String email, String cpfCnpj, String iEstadual,
-			Integer tipo, String contato, List<Endereco> enderecos, Set<String> telefones) {
+	public Fornecedor(Integer id, String nome, String nomeFantasia, String email,
+			String cpfCnpj, String iEstadual, TipoJuridico tipo,  String contato) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -60,14 +55,14 @@ public class Fornecedor implements Serializable {
 		this.email = email;
 		this.cpfCnpj = cpfCnpj;
 		this.iEstadual = iEstadual;
-		this.tipo = tipo;
+		this.tipo = (tipo==null) ? null : tipo.getCod();
 		this.contato = contato;
-		this.enderecos = enderecos;
-		this.telefones = telefones;
-
+		
 	}
-
-
+	
+	public Fornecedor() {
+		
+	}
 
 	public Integer getId() {
 		return id;
@@ -84,7 +79,6 @@ public class Fornecedor implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getNomeFantasia() {
 		return nomeFantasia;
 	}
@@ -108,7 +102,7 @@ public class Fornecedor implements Serializable {
 	public void setCpfCnpj(String cpfCnpj) {
 		this.cpfCnpj = cpfCnpj;
 	}
-
+	
 	public String getiEstadual() {
 		return iEstadual;
 	}
@@ -117,14 +111,15 @@ public class Fornecedor implements Serializable {
 		this.iEstadual = iEstadual;
 	}
 
-	public Integer getTipo() {
-		return tipo;
+	public TipoJuridico getTipo() {
+		return TipoJuridico.toEnum(tipo);
 	}
 
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
+	public void setTipo(TipoJuridico tipo) {
+		this.tipo = tipo.getCod();
 	}
 
+	
 	public String getContato() {
 		return contato;
 	}
@@ -148,7 +143,7 @@ public class Fornecedor implements Serializable {
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
-
+	
 
 
 	@Override
@@ -175,7 +170,7 @@ public class Fornecedor implements Serializable {
 			return false;
 		return true;
 	}
+
 	
-	
-	
+
 }

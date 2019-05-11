@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -44,6 +45,9 @@ public class Pedido  implements Serializable {
 	@JoinColumn(name="representante_id")
 	private Representante representante;
 	
+	
+
+
 	@ManyToOne
 	@JoinColumn(name="endereco_entrega_id")
 	private Endereco enderecoEntrega;
@@ -56,11 +60,12 @@ public class Pedido  implements Serializable {
 	}
 
 
-	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoEntrega) {
+	public Pedido(Integer id, Date instante, Cliente cliente, Representante representante, Endereco enderecoEntrega) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.cliente = cliente;
+		this.representante = representante;
 		this.enderecoEntrega = enderecoEntrega;
 	}
 
@@ -113,6 +118,17 @@ public class Pedido  implements Serializable {
 		this.cliente = cliente;
 	}
 
+	
+	
+
+	public Representante getRepresentante() {
+		return representante;
+	}
+
+
+	public void setRepresentante(Representante representante) {
+		this.representante = representante;
+	}
 
 
 	public Endereco getEnderecoEntrega() {
@@ -171,6 +187,8 @@ public class Pedido  implements Serializable {
 		builder.append(sdf.format(getInstante()));
 		builder.append(", Cliente. ");
 		builder.append(getCliente().getNome());
+		builder.append(", Representante. ");
+		builder.append(getRepresentante().getNome());
 		builder.append(", Situação. ");
 		builder.append(getPagamento().getEstado().getDescricao());
 		builder.append("\nDetalhes:\n");	

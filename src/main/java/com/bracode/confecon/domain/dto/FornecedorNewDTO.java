@@ -4,14 +4,11 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.bracode.confecon.services.validation.UsuarioInsert;
-
-@UsuarioInsert
-public class UsuarioNewDTO implements Serializable {
+//@FornecedorInsert
+public class FornecedorNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@NotEmpty(message="Preenchimento obrigatorio.")
@@ -19,19 +16,23 @@ public class UsuarioNewDTO implements Serializable {
 	private String nome;
 	
 	@NotEmpty(message="Preenchimento obrigatorio.")
+	@Length(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres.")
+	private String nomeFantasia;
+	
+	@NotEmpty(message="Preenchimento obrigatorio.")
 	@Email(message="Email inválido.")
 	private String email;
-
-	@NotEmpty(message="Preenchimento obrigatorio.")
-	private String senha;
 	
-	@NotNull(message="Preenchimento obrigatorio.")
-	private Integer user;
-
-
 	@NotEmpty(message="Preenchimento obrigatorio.")
-	private String cpf;
+	private String cpfCnpj;
 	
+	@NotEmpty(message="Preenchimento obrigatorio.")
+	private String iEstadual;
+	private Integer tipo;
+		
+
+	private String contato;
+
 	@NotEmpty(message="Preenchimento obrigatorio.")
 	private String logradouro;
 	
@@ -53,9 +54,7 @@ public class UsuarioNewDTO implements Serializable {
 	
 	private Integer cidadeId;
 	
-	
-	
-	public UsuarioNewDTO() {
+	public FornecedorNewDTO() {
 		}
 
 	public String getNome() {
@@ -66,6 +65,14 @@ public class UsuarioNewDTO implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
+	}
+
 
 	public String getEmail() {
 		return email;
@@ -74,31 +81,38 @@ public class UsuarioNewDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-		
-	public String getSenha() {
-		return senha;
+
+	public String getCpfCnpj() {
+		return cpfCnpj;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setCpfCnpj(String cpfCnpj) {
+		this.cpfCnpj = cpfCnpj;
 	}
 	
-	public Integer getUser() {
-		return user;
+	public String getiEstadual() {
+		return iEstadual;
 	}
 
-	public void setUser(Integer user) {
-		this.user = user;
+	public void setiEstadual(String iEstadual) {
+		this.iEstadual = iEstadual;
+	}
+
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 	
 	
-
-	public String getCpf() {
-		return cpf;
+	public String getContato() {
+		return contato;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setContato(String contato) {
+		this.contato = contato;
 	}
 
 	public String getLogradouro() {
@@ -173,6 +187,8 @@ public class UsuarioNewDTO implements Serializable {
 		this.cidadeId = cidadeId;
 	}
 
-		
+	
+	
+	
 
 }

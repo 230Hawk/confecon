@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bracode.confecon.domain.Cidade;
 import com.bracode.confecon.domain.Endereco;
+
 import com.bracode.confecon.domain.Usuario;
 import com.bracode.confecon.domain.dto.UsuarioDTO;
 import com.bracode.confecon.domain.dto.UsuarioNewDTO;

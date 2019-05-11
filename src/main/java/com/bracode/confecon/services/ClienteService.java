@@ -20,7 +20,7 @@ import com.bracode.confecon.domain.Cliente;
 import com.bracode.confecon.domain.Endereco;
 import com.bracode.confecon.domain.dto.ClienteDTO;
 import com.bracode.confecon.domain.dto.ClienteNewDTO;
-import com.bracode.confecon.domain.enums.TipoCliente;
+import com.bracode.confecon.domain.enums.TipoJuridico;
 
 import com.bracode.confecon.repositories.ClienteRepository;
 import com.bracode.confecon.repositories.EnderecoRepository;
@@ -112,14 +112,14 @@ public class ClienteService {
 
 	public Cliente fromDto(ClienteNewDTO objClienteNewDto) {
 		Cliente cliente = new Cliente(null, objClienteNewDto.getNome(), objClienteNewDto.getNomeFantasia(), objClienteNewDto.getEmail(),
-				objClienteNewDto.getCpfCnpj(), objClienteNewDto.getiEstadual(), TipoCliente.toEnum(objClienteNewDto.getTipo()),
+				objClienteNewDto.getCpfCnpj(), objClienteNewDto.getiEstadual(), TipoJuridico.toEnum(objClienteNewDto.getTipo()),
 				 objClienteNewDto.getContato());
 
 		Cidade cidade = new Cidade(objClienteNewDto.getCidadeId(), null, null);
 
 		Endereco endereco = new Endereco(null, objClienteNewDto.getLogradouro(), objClienteNewDto.getNumero(),
 				objClienteNewDto.getComplemento(), objClienteNewDto.getBairro(), objClienteNewDto.getCep(), cliente,
-				cidade);
+				null, null, cidade);
 		cliente.getEnderecos().add(endereco);
 		cliente.getTelefones().add(objClienteNewDto.getTelefone1());
 		if (objClienteNewDto.getTelefone2() != null) {

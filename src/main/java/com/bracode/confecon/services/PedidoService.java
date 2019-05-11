@@ -14,6 +14,7 @@ import com.bracode.confecon.domain.Cliente;
 import com.bracode.confecon.domain.ItemPedido;
 import com.bracode.confecon.domain.PagamentoBoleto;
 import com.bracode.confecon.domain.Pedido;
+import com.bracode.confecon.domain.Representante;
 import com.bracode.confecon.domain.enums.EstadoPagamento;
 import com.bracode.confecon.repositories.ItemPedidoRepository;
 import com.bracode.confecon.repositories.PagamentoRepository;
@@ -45,6 +46,9 @@ public class PedidoService {
 	private ClienteService clienteService;
 	
 	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
 	private EmailService emailService;
 	
 	public Pedido find(Integer id) {
@@ -60,6 +64,7 @@ public class PedidoService {
 		obj.setId(null);
 		obj.setInstante(new Date());
 		obj.setCliente(clienteService.find(obj.getCliente().getId()));
+		obj.setRepresentante((Representante) usuarioService.find(obj.getRepresentante().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		if (obj.getPagamento() instanceof PagamentoBoleto) {

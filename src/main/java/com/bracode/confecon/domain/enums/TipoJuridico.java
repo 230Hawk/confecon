@@ -1,6 +1,6 @@
 package com.bracode.confecon.domain.enums;
 
-public enum TipoCliente {
+public enum TipoJuridico {
 
 	PESSOA_FISICA(1, "Pessoa Física"),
 	PESSOA_JURIDICA(2, "Pessoa Jurídica");
@@ -8,7 +8,7 @@ public enum TipoCliente {
 	private int cod;
 	private String descricao;
 	
-	private TipoCliente(int cod, String descricao) {
+	private TipoJuridico(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -21,13 +21,13 @@ public enum TipoCliente {
 		return descricao;
 	}
 	
-	public static TipoCliente toEnum(Integer cod) {
+	public static TipoJuridico toEnum(Integer cod) {
 		
 		if (cod == null) {
 			return null;
 		}
 		
-		for (TipoCliente x : TipoCliente.values()) {
+		for (TipoJuridico x : TipoJuridico.values()) {
 			if (cod.equals(x.getCod())) {
 				return x;
 			}

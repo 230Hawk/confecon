@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import com.bracode.confecon.domain.enums.TipoUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -48,6 +49,10 @@ public class Usuario implements Serializable{
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE_USUARIO")
 	private Set<String> telefones_usuario = new HashSet<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Usuario() {
 		
@@ -118,6 +123,8 @@ public class Usuario implements Serializable{
 	}
 
 
+
+
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
@@ -159,6 +166,9 @@ public class Usuario implements Serializable{
 			return false;
 		return true;
 	}
+
+
+
 
 	
 }

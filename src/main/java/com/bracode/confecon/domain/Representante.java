@@ -1,7 +1,15 @@
 package com.bracode.confecon.domain;
 
-import javax.persistence.Entity;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
@@ -11,6 +19,13 @@ public class Representante extends Usuario {
 
 	private Integer comissao1;
 	private Integer comissao2;
+	
+
+	@JsonIgnore
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
+	
 	
 	public Representante() {
 		
@@ -40,6 +55,18 @@ public class Representante extends Usuario {
 	public void setComissao2(Integer comissao2) {
 		this.comissao2 = comissao2;
 	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	
 	
+	
+	
+
 }

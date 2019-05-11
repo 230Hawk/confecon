@@ -16,7 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.bracode.confecon.domain.enums.TipoCliente;
+import com.bracode.confecon.domain.enums.TipoJuridico;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -41,7 +41,7 @@ public class Cliente implements Serializable {
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE")
+	@CollectionTable(name = "TELEFONE_CLIENTE")
 	private Set<String> telefones = new HashSet<>();
 	
 	@JsonIgnore
@@ -51,7 +51,7 @@ public class Cliente implements Serializable {
 	
 
 	public Cliente(Integer id, String nome, String nomeFantasia, String email,
-			String cpfCnpj, String iEstadual, TipoCliente tipo,  String contato) {
+			String cpfCnpj, String iEstadual, TipoJuridico tipo,  String contato) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -115,11 +115,11 @@ public class Cliente implements Serializable {
 		this.iEstadual = iEstadual;
 	}
 
-	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo);
+	public TipoJuridico getTipo() {
+		return TipoJuridico.toEnum(tipo);
 	}
 
-	public void setTipo(TipoCliente tipo) {
+	public void setTipo(TipoJuridico tipo) {
 		this.tipo = tipo.getCod();
 	}
 
