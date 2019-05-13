@@ -17,8 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+
 import com.bracode.confecon.domain.enums.TipoUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -55,10 +55,12 @@ public class Usuario implements Serializable{
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	public Usuario() {
-		
+		addTipoUser(TipoUser.AUXILIAR);
 	}
 
 	
+
+
 	public Usuario(Integer id, String nome, String email, String senha,
 			 String cpf) {
 		super();
@@ -122,9 +124,6 @@ public class Usuario implements Serializable{
 		this.cpf = cpf;
 	}
 
-
-
-
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
@@ -142,6 +141,28 @@ public class Usuario implements Serializable{
 	public void setTelefones(Set<String> telefones) {
 		this.telefones_usuario = telefones;
 	}
+	
+	
+
+	public Set<String> getTelefones_usuario() {
+		return telefones_usuario;
+	}
+
+
+	public void setTelefones_usuario(Set<String> telefones_usuario) {
+		this.telefones_usuario = telefones_usuario;
+	}
+
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 
 	@Override
 	public int hashCode() {

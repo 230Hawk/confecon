@@ -116,7 +116,7 @@ public class FornecedorService {
 		Cidade cidade = new Cidade(objFornecedorNewDto.getCidadeId(), null, null);
 
 		Endereco endereco = new Endereco(null, objFornecedorNewDto.getLogradouro(), objFornecedorNewDto.getNumero(),
-				objFornecedorNewDto.getComplemento(), objFornecedorNewDto.getBairro(), objFornecedorNewDto.getCep(), null, null, fornecedor, cidade
+				objFornecedorNewDto.getComplemento(), objFornecedorNewDto.getBairro(), objFornecedorNewDto.getCep(), null, null, null, fornecedor, cidade
 				);
 		fornecedor.getEnderecos().add(endereco);
 		fornecedor.getTelefones().add(objFornecedorNewDto.getTelefone1());

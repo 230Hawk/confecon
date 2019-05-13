@@ -23,6 +23,7 @@ import com.bracode.confecon.domain.Pedido;
 import com.bracode.confecon.domain.Produto;
 import com.bracode.confecon.domain.Representante;
 import com.bracode.confecon.domain.Situacao;
+import com.bracode.confecon.domain.Transportadora;
 import com.bracode.confecon.domain.Usuario;
 import com.bracode.confecon.domain.enums.EstadoPagamento;
 import com.bracode.confecon.domain.enums.TipoJuridico;
@@ -39,6 +40,7 @@ import com.bracode.confecon.repositories.PagamentoRepository;
 import com.bracode.confecon.repositories.PedidoRepository;
 import com.bracode.confecon.repositories.ProdutoRepository;
 import com.bracode.confecon.repositories.SituacaoRepository;
+import com.bracode.confecon.repositories.TransportadoraRepository;
 import com.bracode.confecon.repositories.UsuarioRepository;
 
 
@@ -61,6 +63,8 @@ public class DBService {
 	private CidadeRepository cidadeRepository;
 	@Autowired
 	private ClienteRepository clienteRepository;
+	@Autowired
+	private TransportadoraRepository transportadoraRepository;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	@Autowired
@@ -126,9 +130,13 @@ public class DBService {
 		Cidade c2 = new Cidade(null, "Goiânia", est2);
 		Cidade c3 = new Cidade(null, "Anapolis", est2);
 		
-		Cliente cli1 = new Cliente(null,"Leo Falcão","Leo LTDA", "leonardocli@gmail.com", "10795211000111", "152092370111", TipoJuridico.PESSOA_JURIDICA, "Marcelo");
-		Cliente cli2 = new Cliente(null,"Lula Silva", "Lula SA", "lulacli@gmail.com", "25206882000177", "152038695110", TipoJuridico.PESSOA_JURIDICA, "Joao");
-		Cliente cli3 = new Cliente(null,"Leo Hawk", "Hawk LTDA", "leonardofalcaoclig@gmail.com", "04985151000105", "15607303111", TipoJuridico.PESSOA_JURIDICA, "Joze");
+		Cliente cli1 = new Cliente(null,"Leo Falcão Cli","Leo LTDA", "leonardocli@gmail.com", "10795211000111", "152092370111", TipoJuridico.PESSOA_JURIDICA, "Marcelo");
+		Cliente cli2 = new Cliente(null,"Lula Silva Cliv", "Lula SA", "lulacli@gmail.com", "25206882000177", "152038695110", TipoJuridico.PESSOA_JURIDICA, "Joao");
+		Cliente cli3 = new Cliente(null,"Leo Hawk Cli", "Hawk LTDA", "leonardofalcaoclig@gmail.com", "04985151000105", "15607303111", TipoJuridico.PESSOA_JURIDICA, "Joze");
+		
+		Transportadora trans1 = new Transportadora(null,"Leo Falcão Trans","Leo LTDA", "leonardocli@gmail.com", "10795211000111", "152092370111", TipoJuridico.PESSOA_JURIDICA, "Marcelo");
+		Transportadora trans2 = new Transportadora(null,"Lula Silva  Trans", "Lula SA", "lulacli@gmail.com", "25206882000177", "152038695110", TipoJuridico.PESSOA_JURIDICA, "Joao");
+		Transportadora trans3 = new Transportadora(null,"Leo Hawk  Trans", "Hawk LTDA", "leonardofalcaoclig@gmail.com", "04985151000105", "15607303111", TipoJuridico.PESSOA_JURIDICA, "Joze");
 		
 		Fornecedor for1 = new Fornecedor(null,"Leo Falcão For","Leo LTDA", "leonardocli@gmail.com", "10795211000111", "152092370111", TipoJuridico.PESSOA_JURIDICA, "Marcelo");
 		Fornecedor for2 = new Fornecedor(null,"Lula Silva For", "Lula SA", "lulacli@gmail.com", "25206882000177", "152038695110", TipoJuridico.PESSOA_JURIDICA, "Joao");
@@ -141,29 +149,35 @@ public class DBService {
 		Representante rep1 = new Representante(null,"URepLula Silva R", "lulaRep@gmail.com", pe.encode("123"),"89168070187", 5, 10);
 		Representante rep2 = new Representante(null,"UProLula Silva R", "lulaPro@gmail.com", pe.encode("123"),"89168070187", 10, 20);
 		
+		Endereco e6 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", user1, null, null, null, c1);
+		Endereco e7 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", user1, null, null, null, c1);
+		Endereco e8 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", user2, null, null, null, c1);
+		Endereco e9 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321",  user3, null, null, null, c1);
+		Endereco e10 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", user4, null, null, null, c1);
 		
-		Endereco e1 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", cli1, null, null, c1);
-		Endereco e2 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", cli1, null, null,  c1);
-		Endereco e3 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", cli2, null, null,  c2);
-		Endereco e4 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", cli2, null, null, c3);
-		Endereco e5 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", cli3, null, null, c3);
+		Endereco e1 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", null, cli1, null, null, c1);
+		Endereco e2 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", null, cli1, null, null,  c1);
+		Endereco e3 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", null, cli2, null, null,  c2);
+		Endereco e4 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", null, cli2, null, null, c3);
+		Endereco e5 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", null, cli3, null, null, c3);
+				
+		Endereco e11 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", null, null, trans1, null,  c1);
+		Endereco e12 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", null, null, trans2, null,  c1);
+		Endereco e13 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", null, null, trans2, null,  c1);
+		Endereco e14 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", null, null, trans3, null,  c1);
+		Endereco e15 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", null, null, trans3, null,  c1);
 		
-		Endereco e6 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", null, user1, null, c1);
-		Endereco e7 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", null,user1, null,  c1);
-		Endereco e8 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", null, user2, null,  c2);
-		Endereco e9 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", null, user3, null, c3);
-		Endereco e10 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", null, user4, null, c3);
-		
-		Endereco e11 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", null, null, for1, c1);
-		Endereco e12 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", null, null, for1, c1);
-		Endereco e13 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", null, null, for2,  c2);
-		Endereco e14 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", null, null, for3, c3);
-		Endereco e15 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", null, null,for3, c3);
+		Endereco e16 = new Endereco(null, "C-185", "sn", "q 609 l 10", "nova suiça", "74280110", null, null, null,  for1, c1);
+		Endereco e17 = new Endereco(null, "C-180", "sn", "q 459 l 3", "Jardim America", "74275180", null, null, null,  for1, c1);
+		Endereco e18 = new Endereco(null, "C-171", "sn", "q 205 l 5", "Jardim America", "74747222", null, null, null,  for2,  c2);
+		Endereco e19 = new Endereco(null, "C-255", "sn", "q 275 l 12", "Parque Amazonia", "74255321", null, null, null,  for3, c3);
+		Endereco e20 = new Endereco(null, "C-100", "sn", "q 20 l 2", "Campinas", "74255280", null, null,  null, for3, c3);
+
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
-		Pedido ped1 = new Pedido(null, sdf.parse(" 10/06/2017 12:30 "), cli1, rep1, e1);
-		Pedido ped2 = new Pedido(null, sdf.parse(" 20/08/2017 14:30 "), cli1, rep2, e2);
+		Pedido ped1 = new Pedido(null, sdf.parse(" 10/06/2017 12:30 "), cli1, rep1, e1, trans1);
+		Pedido ped2 = new Pedido(null, sdf.parse(" 20/08/2017 14:30 "), cli1, rep2, e2, trans2);
 		
 		Pagamento pagto1 = new PagamentoCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		Pagamento pagto2 = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("28/08/2018 00:00"), null );
@@ -274,6 +288,10 @@ public class DBService {
 		rep1.getTelefones().addAll(Arrays.asList("32584562"));
 		rep2.getTelefones().addAll(Arrays.asList("32584563"));
 		
+		trans1.getTelefones().addAll(Arrays.asList("32584563", "32592828"));
+		trans2.getTelefones().addAll(Arrays.asList("32584564", "32592829"));
+		trans3.getTelefones().addAll(Arrays.asList("9984564", "96592829"));
+		
 		for1.getTelefones().addAll(Arrays.asList("32584563", "32592828"));
 		for2.getTelefones().addAll(Arrays.asList("32584564", "32592829"));
 		for3.getTelefones().addAll(Arrays.asList("9984564", "96592829"));
@@ -331,11 +349,13 @@ public class DBService {
 		
 		clienteRepository.saveAll(Arrays.asList(cli1, cli2, cli3));
 		
+		transportadoraRepository.saveAll(Arrays.asList(trans1, trans2, trans3));
+		
 		usuarioRepository.saveAll(Arrays.asList(user1, user2, user3, user4, rep1, rep2));
 		
 		fornecedorRepository.saveAll(Arrays.asList(for1, for2, for3));
 		
-		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20));
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		

@@ -19,72 +19,72 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.bracode.confecon.domain.Fornecedor;
-import com.bracode.confecon.domain.dto.FornecedorDTO;
-import com.bracode.confecon.domain.dto.FornecedorNewDTO;
-import com.bracode.confecon.services.FornecedorService;
+import com.bracode.confecon.domain.Transportadora;
+import com.bracode.confecon.domain.dto.TransportadoraDTO;
+import com.bracode.confecon.domain.dto.TransportadoraNewDTO;
+import com.bracode.confecon.services.TransportadoraService;
 
 @RestController
-@RequestMapping(value = "/fornecedores")
-public class FornecedorResource {
+@RequestMapping(value = "/transportadoras")
+public class TransportadoraResource {
 
 	@Autowired
-	private FornecedorService fornecedorService;
+	private TransportadoraService transportadoraService;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Fornecedor> find(@PathVariable Integer id) {
-		Fornecedor objFornecedor = fornecedorService.find(id);
-		return ResponseEntity.ok().body(objFornecedor);
+	public ResponseEntity<Transportadora> find(@PathVariable Integer id) {
+		Transportadora objTransportadora = transportadoraService.find(id);
+		return ResponseEntity.ok().body(objTransportadora);
 	}
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody FornecedorNewDTO objFornecedorNewDto) {
-		Fornecedor objFornecedor = fornecedorService.fromDto(objFornecedorNewDto);
-		objFornecedor = fornecedorService.insert(objFornecedor);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objFornecedor.getId())
+	public ResponseEntity<Void> insert(@Valid @RequestBody TransportadoraNewDTO objTransportadoraNewDto) {
+		Transportadora objTransportadora = transportadoraService.fromDto(objTransportadoraNewDto);
+		objTransportadora = transportadoraService.insert(objTransportadora);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(objTransportadora.getId())
 				.toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody FornecedorDTO objFornecedorDto, @PathVariable Integer id) {
-		Fornecedor objFornecedor = fornecedorService.fromDto(objFornecedorDto);
-		objFornecedor.setId(id);
-		objFornecedor = fornecedorService.update(objFornecedor);
+	public ResponseEntity<Void> update(@Valid @RequestBody TransportadoraDTO objTransportadoraDto, @PathVariable Integer id) {
+		Transportadora objTransportadora = transportadoraService.fromDto(objTransportadoraDto);
+		objTransportadora.setId(id);
+		objTransportadora = transportadoraService.update(objTransportadora);
 		return ResponseEntity.noContent().build();
 	}
 
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-		fornecedorService.delete(id);
+		transportadoraService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<FornecedorDTO>> findAll() {
-		List<Fornecedor> listFornecedor = fornecedorService.findAll();
-		List<FornecedorDTO> listFornecedorDTO = listFornecedor.stream().map(objFornecedor -> new FornecedorDTO(objFornecedor))
+	public ResponseEntity<List<TransportadoraDTO>> findAll() {
+		List<Transportadora> listTransportadora = transportadoraService.findAll();
+		List<TransportadoraDTO> listTransportadoraDTO = listTransportadora.stream().map(objTransportadora -> new TransportadoraDTO(objTransportadora))
 				.collect(Collectors.toList());
-		return ResponseEntity.ok().body(listFornecedorDTO);
+		return ResponseEntity.ok().body(listTransportadoraDTO);
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
-	public ResponseEntity<Page<FornecedorDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+	public ResponseEntity<Page<TransportadoraDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-		Page<Fornecedor> listFornecedor = fornecedorService.findPage(page, linesPerPage, orderBy, direction);
-		Page<FornecedorDTO> listFornecedorDTO = listFornecedor.map(objFornecedor -> new FornecedorDTO(objFornecedor));
-		return ResponseEntity.ok().body(listFornecedorDTO);
+		Page<Transportadora> listTransportadora = transportadoraService.findPage(page, linesPerPage, orderBy, direction);
+		Page<TransportadoraDTO> listTransportadoraDTO = listTransportadora.map(objTransportadora -> new TransportadoraDTO(objTransportadora));
+		return ResponseEntity.ok().body(listTransportadoraDTO);
 	}
 
 	@RequestMapping(value = "/picture", method = RequestMethod.POST)
 	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name = "file") MultipartFile file) {
-		URI uri = fornecedorService.uploadProfileFile(file);
+		URI uri = transportadoraService.uploadProfileFile(file);
 		return ResponseEntity.created(uri).build();
 	}
 

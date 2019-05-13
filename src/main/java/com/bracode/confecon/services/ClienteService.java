@@ -118,7 +118,7 @@ public class ClienteService {
 		Cidade cidade = new Cidade(objClienteNewDto.getCidadeId(), null, null);
 
 		Endereco endereco = new Endereco(null, objClienteNewDto.getLogradouro(), objClienteNewDto.getNumero(),
-				objClienteNewDto.getComplemento(), objClienteNewDto.getBairro(), objClienteNewDto.getCep(), cliente,
+				objClienteNewDto.getComplemento(), objClienteNewDto.getBairro(), objClienteNewDto.getCep(), null, cliente,
 				null, null, cidade);
 		cliente.getEnderecos().add(endereco);
 		cliente.getTelefones().add(objClienteNewDto.getTelefone1());

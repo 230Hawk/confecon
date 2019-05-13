@@ -126,8 +126,7 @@ public class UsuarioService {
 		Cidade cidade = new Cidade(objUsuarioNewDto.getCidadeId(), null, null);
 
 		Endereco endereco_usuario = new Endereco(null, objUsuarioNewDto.getLogradouro(), objUsuarioNewDto.getNumero(),
-				objUsuarioNewDto.getComplemento(), objUsuarioNewDto.getBairro(), objUsuarioNewDto.getCep(), null, usuario,
-				null, cidade);
+				objUsuarioNewDto.getComplemento(), objUsuarioNewDto.getBairro(), objUsuarioNewDto.getCep(), usuario, null, null, null, cidade);
 		usuario.getEnderecos().add(endereco_usuario);
 		usuario.getTelefones().add(objUsuarioNewDto.getTelefone1());
 		if (objUsuarioNewDto.getTelefone2() != null) {

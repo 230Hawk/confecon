@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Pedido  implements Serializable {
@@ -45,7 +46,11 @@ public class Pedido  implements Serializable {
 	@JoinColumn(name="representante_id")
 	private Representante representante;
 	
-	
+
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "transportadora_id")
+	private Transportadora transportadora;
 
 
 	@ManyToOne
@@ -60,13 +65,15 @@ public class Pedido  implements Serializable {
 	}
 
 
-	public Pedido(Integer id, Date instante, Cliente cliente, Representante representante, Endereco enderecoEntrega) {
+	public Pedido(Integer id, Date instante, Cliente cliente, Representante representante, Endereco enderecoEntrega, Transportadora transportadora) {
 		super();
 		this.id = id;
 		this.instante = instante;
 		this.cliente = cliente;
 		this.representante = representante;
 		this.enderecoEntrega = enderecoEntrega;
+		this.transportadora = transportadora;
+		
 	}
 
 	public double getValorTotal() {
@@ -141,6 +148,18 @@ public class Pedido  implements Serializable {
 		this.enderecoEntrega = enderecoEntrega;
 	}
 	
+	
+	
+	public Transportadora getTransportadora() {
+		return transportadora;
+	}
+
+
+	public void setTransportadora(Transportadora transportadora) {
+		this.transportadora = transportadora;
+	}
+
+
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
